@@ -3,6 +3,7 @@ const { asyncMiddleware } = require('middleware-async');
 const bp = require('body-parser');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
+const multer = require("multer");
 
 const Authentification = require('../../src/gateway/Authentification');
 const TokenVerify = require('../../src/gateway/TokenVerify');
@@ -13,11 +14,11 @@ module.exports = function (app) {
     app.use(bp.urlencoded({ extended: true }));
 
     app.post('/login', cors(), asyncMiddleware(async (req, res) => {
-        var result = await Authentification.Authentification_Login(req);
-        var status = 0;
+        let result = await Authentification.Authentification_Login(req);
+        let status = 0;
 
         if (result != null) {
-            var hash = crypto.pbkdf2Sync(req.body.password, result.salt, 1000, 64, `sha512`).toString(`hex`);
+            let hash = crypto.pbkdf2Sync(req.body.password, result.salt, 1000, 64, `sha512`).toString(`hex`);
             if (hash != result.hash)
                 status = -2
         } else {
@@ -41,7 +42,7 @@ module.exports = function (app) {
                     message: "Connexion réussie"
                 });
                 let code = Math.floor(100000 + Math.random() * 900000)
-                var result = await Authentification.Authentification_SetLoginVerificationCode(result.email, code);
+                let result = await Authentification.Authentification_SetLoginVerificationCode(result.email, code);
                 await MailerMiddleware.Mailler_LoginConfirmationAccount(req.body, code);
                 break;
             case -1:
@@ -54,7 +55,7 @@ module.exports = function (app) {
     }))
 
     app.post('/otp', cors(), asyncMiddleware(async (req, res) => {
-        var result = await Authentification.Authentification_GetLoginVerificationCode(req);
+        let result = await Authentification.Authentification_GetLoginVerificationCode(req);
 
         if (result == -1) {
             res.status(400).json({ status: "KO", message: "Code invalide" });
@@ -64,13 +65,7 @@ module.exports = function (app) {
     }))
 
     app.post('/register', cors(), asyncMiddleware(async (req, res) => {
-        var result = await Authentification.Authentification_Register(req.body);
-
-        await FireBaseMiddleware.FireBaseUploadProfilPicture(req.files[0].filename, id.userId);
-
-        let FileUrl = await FireBaseMiddleware.FireBaseDownloadProfilePicture(req.files[0].filename, id.userId);
-
-        await Authentification.Authentification_SetProfilPicture(id.userId, FileUrl);
+        let result = await Authentification.Authentification_Register(req.body);
 
         switch (result) {
             case 0:
@@ -96,7 +91,7 @@ module.exports = function (app) {
     })
 
     app.post('/forgotpasswordemail', cors(), asyncMiddleware(async (req, res) => {
-        var result = await Authentification.Authentification_ResetPasswordEmail(req);
+        let result = await Authentification.Authentification_ResetPasswordEmail(req);
 
         if (result == -1) {
             res.status(400).json({ status: "KO", message: "Le compte n'existe pas" });
@@ -106,7 +101,7 @@ module.exports = function (app) {
     }))
 
     app.post('/forgotpasswordset', cors(), asyncMiddleware(async (req, res) => {
-        var result = await Authentification.Authentification_ResetForgotPassword(req);
+        let result = await Authentification.Authentification_ResetForgotPassword(req);
 
         if (result == -1) {
             res.status(400).json({ status: "KO", message: "Error" });
@@ -119,7 +114,7 @@ module.exports = function (app) {
         if (TokenVerify.TokenVerify(req) == -1)
             res.status(400).json({ status: "KO", message: "Invalid Token" });
         else {
-            var result = await Authentification.Authentification_ResetPassword(req);
+            let result = await Authentification.Authentification_ResetPassword(req);
 
             switch (result) {
                 case 0:
@@ -142,7 +137,7 @@ module.exports = function (app) {
         if (TokenVerify.TokenVerify(req) == -1)
             res.status(400).json({ status: "KO", message: "Invalid Token" });
         else {
-            var result = await Authentification.Authentification_Get_Info(req);
+            let result = await Authentification.Authentification_Get_Info(req);
             res.status(200).json({ status: "OK", email: result.email, pseudo: result.pseudo });
         }
     }))

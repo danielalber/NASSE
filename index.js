@@ -11,8 +11,7 @@ const connectiondb = require('./src/middleware/ConnectiondbMiddleware');
 const MongoDBConfig = config.MongoDB;
 const AppConfig = config.App;
 const MaillerConfig = config.Mailler;
-const FireBaseConfig = config.FireBase;
-const finalConfig = _.merge(MongoDBConfig, MaillerConfig, AppConfig, FireBaseConfig);
+const finalConfig = _.merge(MongoDBConfig, MaillerConfig, AppConfig);
 
 global.gConfig = finalConfig;
 
@@ -30,7 +29,7 @@ const db = connectiondb.connectToDb();
 
 const Authentification = require('./src/routes/Authentification.js')(app);
 
-var port = global.gConfig.AppPort || 8080;
+let port = global.gConfig.AppPort || 8080;
 
 app.listen(port, () => {
     console.log('listening on port : ' + port);

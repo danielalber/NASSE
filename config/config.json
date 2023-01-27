@@ -5,9 +5,6 @@
     "MongoDB": {
         "MongoDB_url": "mongodb+srv://root:tmnjLNsj66OW8UBu@cluster0.srdqa.mongodb.net/NASSE?retryWrites=true&w=majority"
     },
-    "FireBase": {
-        "FireBaseStorageBucket": "gs://nasse-505c8.appspot.com/"
-    },
     "Mailler": {
         "Mailler_Email": "kiwi.app.epitech@gmail.com",
         "Mailler_Password": "zprnypopgrcryxib",
