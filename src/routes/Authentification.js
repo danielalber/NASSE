@@ -3,7 +3,6 @@ const { asyncMiddleware } = require('middleware-async');
 const bp = require('body-parser');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
-const multer = require("multer");
 
 const Authentification = require('../../src/gateway/Authentification');
 const TokenVerify = require('../../src/gateway/TokenVerify');
