@@ -1,6 +1,6 @@
 version: '2'
 services:
-  web:
+  api:
     build: .
     container_name: nasse_api
     restart: always
