@@ -52,7 +52,7 @@ const app = express();
 app.use(cors());
 
 app.use('/api-docs', swaggerUi.serve);
-app.get('/api-docs', swaggerUi.setup(specs));
+app.get('/api-docs', cors(), swaggerUi.setup(specs));
 
 // app.use(
 //     "/api-docs",
