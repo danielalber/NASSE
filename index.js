@@ -52,7 +52,6 @@ const app = express();
 app.use(cors());
 
 app.use(
-    cors(),
     "/api-docs",
     swaggerUi.serve,
     swaggerUi.setup(specs)
