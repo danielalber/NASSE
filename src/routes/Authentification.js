@@ -296,7 +296,7 @@ module.exports = function (app) {
                         sexe: result.sexe,
                         pseudo: result.pseudo
                     },
-                    status: "OK",
+                    status: "OKaezaeaz",
                     token: jwt.sign({ userId: result._id, email: result.email, pseudo: result.pseudo },
                         '%hx5g@BdocPDX4D^P#owO#11tg5R$RX#', { expiresIn: '24h' }
                     ),
