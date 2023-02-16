@@ -52,24 +52,11 @@ const app = express();
 app.use(cors());
 
 app.use(
+    cors(),
     "/api-docs",
     swaggerUi.serve,
     swaggerUi.setup(specs)
 );
-
-app.use((req, res, next) => {
-    res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
-    res.setHeader('Cross-origin-Embedder-Policy', 'require-corp');
-    res.setHeader('Cross-origin-Opener-Policy', 'same-origin');
-
-    if (req.method === 'OPTIONS') {
-        res.sendStatus(200)
-    } else {
-        next()
-    }
-});
 
 app.use(helmet());
 
@@ -80,6 +67,7 @@ app.use(morgan('dev'));
 const db = connectiondb.connectToDb();
 
 const Authentification = require('./src/routes/Authentification.js')(app);
+const Device = require('./src/routes/Device.js')(app);
 
 var port = global.gConfig.AppPort || 8080;
 
