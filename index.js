@@ -49,21 +49,19 @@ global.gConfig = finalConfig;
 
 const app = express();
 
-app.use(cors());
-
 app.use(
     "/api-docs",
     swaggerUi.serve,
     swaggerUi.setup(specs)
 );
 
+app.use(cors());
 
-app.use(helmet());
+// app.use(helmet());
 
 app.use(bodyParser.json());
 
 app.use(morgan('dev'));
-
 
 const db = connectiondb.connectToDb();
 
