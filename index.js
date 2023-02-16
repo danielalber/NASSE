@@ -36,7 +36,7 @@ const options = {
         },
         servers: [
             {
-                url: "http://51.178.44.20:2546",
+                url: "http://localhost:8080",
             },
         ],
     },
@@ -49,7 +49,7 @@ global.gConfig = finalConfig;
 
 const app = express();
 
-// app.use(cors());
+app.use(cors());
 
 app.use(
     "/api-docs",
