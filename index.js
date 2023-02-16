@@ -49,9 +49,6 @@ global.gConfig = finalConfig;
 
 const app = express();
 
-app.use(cors({
-    origin: '*'
-}));
 
 app.use(
     cors({
