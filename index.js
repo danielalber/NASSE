@@ -49,6 +49,7 @@ global.gConfig = finalConfig;
 
 const app = express();
 
+app.use(cors());
 
 app.use(
     "/api-docs",
