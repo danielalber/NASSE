@@ -51,12 +51,15 @@ const app = express();
 
 app.use(cors());
 
-app.use(
-    "/api-docs",
-    cors(),
-    swaggerUi.serve,
-    swaggerUi.setup(specs)
-);
+app.use('/api-docs', swaggerUi.serve);
+app.get('/api-docs', swaggerUi.setup(specs));
+
+// app.use(
+//     "/api-docs",
+//     cors(),
+//     swaggerUi.serve,
+//     swaggerUi.setup(specs)
+// );
 
 app.use(helmet());
 
