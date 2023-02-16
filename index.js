@@ -51,15 +51,9 @@ const app = express();
 
 app.use(cors({credentials: true, origin: true}));
 app.options('*', cors());
+
 app.use('/api-docs', swaggerUi.serve);
 app.get('/api-docs', cors(), swaggerUi.setup(specs));
-
-// app.use(
-//     "/api-docs",
-//     cors(),
-//     swaggerUi.serve,
-//     swaggerUi.setup(specs)
-// );
 
 app.use(helmet());
 
