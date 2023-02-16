@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 
+// Verification token given from request
 function TokenVerify(req) {
     if (typeof req.body.token !== 'undefined' && req.body.token) {
         try {
@@ -18,6 +19,7 @@ function TokenVerify(req) {
     }
 }
 
+// get information in token
 function TokenGetInfo(req) {
     const decodedToken = jwt.verify(req.body.token, '%hx5g@BdocPDX4D^P#owO#11tg5R$RX#');
     return decodedToken;

@@ -1,5 +1,6 @@
 const DeviceSchema = require('../schema/DeviceSchema');
 
+// return list of device for a user
 async function Get_Device(req) 
 {
     var requestdb = DeviceSchema.DeviceSchema;
@@ -7,6 +8,7 @@ async function Get_Device(req)
     return await requestdb.findOne({ owner: req.body.owner });
 }
 
+// add a device to a user
 async function Add_Device(req) 
 {
     var requestdb = DeviceSchema.DeviceSchema;
@@ -36,6 +38,7 @@ async function Add_Device(req)
     return result;
 }
 
+// Delete a device from a user
 async function Devare_Device(req) 
 {
     var requestdb = DeviceSchema.DeviceSchema;

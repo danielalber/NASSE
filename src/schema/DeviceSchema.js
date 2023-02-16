@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const { Schema } = mongoose;
 
+// MongoDB shema Device
 const DeviceSchema = new Schema({
     owner: String,
     name: String,

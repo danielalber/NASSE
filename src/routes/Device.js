@@ -129,7 +129,9 @@ module.exports = function (app) {
     app.use(bp.json());
     app.use(bp.urlencoded({ extended: true }));
 
+    // Get list of revice
     app.post('/device', cors(), asyncMiddleware(async (req, res) => {
+        // Check token
         if (TokenVerify.TokenVerify(req) == -1)
             res.status(400).json({ status: "KO", message: "Invalid Token" });
         else {
@@ -139,7 +141,9 @@ module.exports = function (app) {
         }
     }))
 
+    // add device
     app.post('/adddevice', cors(), asyncMiddleware(async (req, res) => {
+        // Check token
         if (TokenVerify.TokenVerify(req) == -1)
             res.status(400).json({ status: "KO", message: "Invalid Token" });
         else {
@@ -163,8 +167,10 @@ module.exports = function (app) {
             }
         }
     }))
-
+    
+    // remove device
     app.post('/removedevice', cors(), asyncMiddleware(async (req, res) => {
+        // Check token
         if (TokenVerify.TokenVerify(req) == -1)
             res.status(400).json({ status: "KO", message: "Invalid Token" });
         else {

@@ -273,6 +273,7 @@ module.exports = function (app) {
     app.use(bp.json());
     app.use(bp.urlencoded({ extended: true }));
 
+    // Login route
     app.post('/login', cors(), asyncMiddleware(async (req, res) => {
         var result = await Authentification.Authentification_Login(req);
         var status = 0;
@@ -314,6 +315,7 @@ module.exports = function (app) {
         }
     }))
 
+    // OTP verification route
     app.post('/otp', cors(), asyncMiddleware(async (req, res) => {
         var result = await Authentification.Authentification_GetLoginVerificationCode(req);
 
@@ -324,6 +326,7 @@ module.exports = function (app) {
         }
     }))
 
+    // Register route
     app.post('/register', cors(), asyncMiddleware(async (req, res) => {
         var result = await Authentification.Authentification_Register(req.body);
 
@@ -346,10 +349,12 @@ module.exports = function (app) {
         }
     }))
 
+    // logout route
     app.get('/logout', cors(), (req, res) => {
         res.send('Welcome to Logout');
     })
 
+    // request mail for forgot passwors
     app.post('/forgotpasswordemail', cors(), asyncMiddleware(async (req, res) => {
         var result = await Authentification.Authentification_ResetPasswordEmail(req);
 
@@ -360,6 +365,7 @@ module.exports = function (app) {
         }
     }))
 
+    // forgot passord set new password
     app.post('/forgotpasswordset', cors(), asyncMiddleware(async (req, res) => {
         var result = await Authentification.Authentification_ResetForgotPassword(req);
 
@@ -370,7 +376,9 @@ module.exports = function (app) {
         }
     }))
 
+    // reset password if logged
     app.post('/resetpassword', cors(), asyncMiddleware(async (req, res) => {
+        // Check token
         if (TokenVerify.TokenVerify(req) == -1)
             res.status(400).json({ status: "KO", message: "Invalid Token" });
         else {
@@ -393,7 +401,9 @@ module.exports = function (app) {
         }
     }))
 
+    // retreive user informations
     app.post('/userinfo', cors(), asyncMiddleware(async (req, res) => {
+        // Check token
         if (TokenVerify.TokenVerify(req) == -1)
             res.status(400).json({ status: "KO", message: "Invalid Token" });
         else {

@@ -3,6 +3,7 @@ const UserSchema = require('../schema/UserSchema');
 const { TokenGetInfo } = require('./TokenVerify');
 const MailerMiddleware = require('../../src/middleware/MailerMiddleware');
 
+// Create a account to a user
 async function Authentification_Register(req) {
     var requestdb = UserSchema.UserSchema;
     console.log(req);
@@ -37,12 +38,14 @@ async function Authentification_Register(req) {
     return result;
 }
 
+// Authentificate a user
 async function Authentification_Login(req) {
     var requestdb = UserSchema.UserSchema;
 
     return await requestdb.findOne({ email: req.body.email })
 }
 
+// Request a mail for recovery password
 async function Authentification_ResetPasswordEmail(req) {
     var requestdb = UserSchema.UserSchema;
 
@@ -65,6 +68,7 @@ async function Authentification_ResetPasswordEmail(req) {
     }
 }
 
+// Reset password when logged
 async function Authentification_ResetPassword(req) {
     var requestdb = UserSchema.UserSchema;
 
@@ -90,6 +94,7 @@ async function Authentification_ResetPassword(req) {
     }
 }
 
+// Reset password if not logged
 async function Authentification_ResetForgotPassword(req) {
     var requestdb = UserSchema.UserSchema;
 
@@ -107,6 +112,7 @@ async function Authentification_ResetForgotPassword(req) {
     return 0;
 }
 
+// get information about a user
 async function Authentification_Get_Info(req) {
     var requestdb = UserSchema.UserSchema;
     var userconnected = TokenGetInfo(req);
@@ -114,23 +120,27 @@ async function Authentification_Get_Info(req) {
     return await requestdb.findOne({ email: userconnected.email });
 }
 
+// get id from a user
 async function Authentification_Get_userId(req) {
     var requestdb = UserSchema.UserSchema;
 
     return await requestdb.findOne({ email: req.body.email });
 }
 
+// Set a OTP code verification to a user
 async function Authentification_SetLoginVerificationCode(email, code) {
     var requestdb = UserSchema.UserSchema;
 
     await requestdb.updateOne({ email: email }, { $set: { "verification": code } });
 }
 
+// set profil picture
 async function Authentification_SetProfilPicture(userId, fileUrl) {
     var requestdb = UserSchema.UserSchema;
     return await requestdb.updateOne({ _id: userId }, { $set: { "profilpicture": fileUrl } });
 }
 
+// get TOP verification code
 async function Authentification_GetLoginVerificationCode(req) {
     var requestdb = UserSchema.UserSchema;
 

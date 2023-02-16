@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+// Create connexion to MongoDB
 function connectToDb() {
     mongoose.connect(global.gConfig.MongoDB_url, { useNewUrlParser: true, useUnifiedTopology: true });
 
