@@ -54,7 +54,9 @@ app.use(cors({
 }));
 
 app.use(
-    cors(),
+    cors({
+        origin: '*'
+    }),
     "/api-docs",
     swaggerUi.serve,
     swaggerUi.setup(specs)
