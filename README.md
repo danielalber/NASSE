@@ -4,7 +4,6 @@
 ### Python
 * You must install `python3`, follow this link [Python3 Installation](https://www.python.org/downloads/)
 * You must have `pip`
-HELLo
 
 
 ### Requirements
