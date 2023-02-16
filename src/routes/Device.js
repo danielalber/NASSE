@@ -12,9 +12,9 @@
  *         owner:
  *           type: string
  *           description: Id of the owner
- *         pseudo:
+ *         name:
  *           type: string
- *           description: Pseudo of the user
+ *           description: name of the device
  *         email:
  *           type: string
  *           description: Email of the user
