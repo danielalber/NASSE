@@ -1,7 +1,7 @@
 const nodemailer = require("nodemailer");
 
 async function Mailler_ForgotPasswordEmail(req, compte, generatePassword) {
-    let transporter = nodemailer.createTransport({
+    var transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
             user: global.gConfig.Mailler_Email,
@@ -10,7 +10,7 @@ async function Mailler_ForgotPasswordEmail(req, compte, generatePassword) {
         tls: { rejectUnauthorized: false }
     });
 
-    let info = await transporter.sendMail({
+    var info = await transporter.sendMail({
         from: '"KiwiGram" <KiwiGram.app.epitech@gmail.com>',
         to: req.body.email,
         subject: "Email de récupération de mot de passe",
@@ -22,7 +22,7 @@ async function Mailler_ForgotPasswordEmail(req, compte, generatePassword) {
 }
 
 async function Mailler_LoginConfirmationAccount(req, generateCode) {
-    let transporter = nodemailer.createTransport({
+    var transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
             user: global.gConfig.Mailler_Email,
@@ -31,7 +31,7 @@ async function Mailler_LoginConfirmationAccount(req, generateCode) {
         tls: { rejectUnauthorized: false }
     });
 
-    let info = await transporter.sendMail({
+    var info = await transporter.sendMail({
         from: '"KiwiGram" <KiwiGram.app.epitech@gmail.com>',
         to: req.email,
         subject: "Code de confirmation de connexion",

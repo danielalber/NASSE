@@ -2,16 +2,16 @@ const DeviceSchema = require('../schema/DeviceSchema');
 
 async function Get_Device(req) 
 {
-    let requestdb = DeviceSchema.DeviceSchema;
+    var requestdb = DeviceSchema.DeviceSchema;
 
     return await requestdb.findOne({ owner: req.body.owner });
 }
 
 async function Add_Device(req) 
 {
-    let requestdb = DeviceSchema.DeviceSchema;
+    var requestdb = DeviceSchema.DeviceSchema;
 
-    let result = 0;
+    var result = 0;
     if (req.owner == null || req.name == null || req.serial == null) {
         return -4;
     }
@@ -36,15 +36,15 @@ async function Add_Device(req)
     return result;
 }
 
-async function Delete_Device(req) 
+async function Devare_Device(req) 
 {
-    let requestdb = DeviceSchema.DeviceSchema;
+    var requestdb = DeviceSchema.DeviceSchema;
 
-    return await requestdb.deleteOne({ id: req.body.id })
+    return await requestdb.devareOne({ id: req.body.id })
 }
 
 module.exports = {
     Get_Device,
     Add_Device,
-    Delete_Device
+    Devare_Device
 };

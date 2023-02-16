@@ -13,7 +13,7 @@ module.exports = function (app) {
         if (TokenVerify.TokenVerify(req) == -1)
             res.status(400).json({ status: "KO", message: "Invalid Token" });
         else {
-            let result = await Device.Get_Device(req);
+            var result = await Device.Get_Device(req);
             res.status(200).json({ status: "OK", message: result });
 
         }
@@ -23,7 +23,7 @@ module.exports = function (app) {
         if (TokenVerify.TokenVerify(req) == -1)
             res.status(400).json({ status: "KO", message: "Invalid Token" });
         else {
-            let result = await Device.Add_Device(req);
+            var result = await Device.Add_Device(req);
             switch (result) {
                 case 0:
                     res.status(200).json({ status: "OK", message: "Device add successfully" });
@@ -48,8 +48,8 @@ module.exports = function (app) {
         if (TokenVerify.TokenVerify(req) == -1)
             res.status(400).json({ status: "KO", message: "Invalid Token" });
         else {
-            Device.Delete_Device(req);
-            res.status(200).json({ status: "OK", message: "Device delete successfully" });
+            Device.Devare_Device(req);
+            res.status(200).json({ status: "OK", message: "Device devare successfully" });
         }
     }))
 };

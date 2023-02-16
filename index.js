@@ -29,7 +29,7 @@ const db = connectiondb.connectToDb();
 
 const Authentification = require('./src/routes/Authentification.js')(app);
 
-let port = global.gConfig.AppPort || 8080;
+var port = global.gConfig.AppPort || 8080;
 
 app.listen(port, () => {
     console.log('listening on port : ' + port);
