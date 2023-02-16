@@ -72,7 +72,7 @@ const db = connectiondb.connectToDb();
 const Authentification = require('./src/routes/Authentification.js')(app);
 const Device = require('./src/routes/Device.js')(app);
 
-var port = global.gConfig.AppPort || 2546;
+var port = global.gConfig.AppPort || 8080;
 
 app.listen(port, () => {
     console.log('listening on port : ' + port);
