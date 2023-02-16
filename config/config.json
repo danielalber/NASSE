@@ -1,6 +1,6 @@
 {
     "App": {
-        "AppPort": "8080"
+        "AppPort": "2546"
     },
     "MongoDB": {
         "MongoDB_url": "mongodb+srv://root:tmnjLNsj66OW8UBu@cluster0.srdqa.mongodb.net/NASSE?retryWrites=true&w=majority"
