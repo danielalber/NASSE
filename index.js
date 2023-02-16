@@ -36,7 +36,7 @@ const options = {
         },
         servers: [
             {
-                url: "http://51.178.44.20:2546",
+                url: "http://localhost:8080",
             },
         ],
     },
@@ -53,21 +53,23 @@ app.use(cors({
     origin: '*'
 }));
 
+app.use(
+    cors(),
+    "/api-docs",
+    swaggerUi.serve,
+    swaggerUi.setup(specs)
+);
+
 app.use(helmet());
 
 app.use(bodyParser.json());
 
 app.use(morgan('dev'));
 
-app.use(
-    "/api-docs",
-    swaggerUi.serve,
-    swaggerUi.setup(specs)
-);
-
 const db = connectiondb.connectToDb();
 
 const Authentification = require('./src/routes/Authentification.js')(app);
+const Device = require('./src/routes/Device.js')(app);
 
 var port = global.gConfig.AppPort || 8080;
 
