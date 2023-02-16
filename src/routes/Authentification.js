@@ -64,8 +64,8 @@
  *                  profilpicture": "undefined"
  *                  sexe: M
  *                  pseudo: poliskovia
- *               status: The New Turing Omnibus
- *               token: Alexander K. Dewdney
+ *               status: OK
+ *               token: a9z6zbhbh67487jhvkjhv764khva9z6zbhbh67487jhvkjhv764khva9z6zbhbh67487jhvkjhv764khva9z6zbhbh67487jhvkjhv764khva9z6zbhbh67487jhvkjhv764khva9z6zbhbh67487jhvkjhv764khv
  *               message: false
  *       400:
  *         description: Login Error

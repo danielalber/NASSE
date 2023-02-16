@@ -15,60 +15,39 @@
  *         name:
  *           type: string
  *           description: name of the device
- *         email:
+ *         serial:
  *           type: string
- *           description: Email of the user
- *         sexe:
- *           type: string
- *           description: Sexe of the user
- *         hash:
- *           type: string
- *           description: Hash of the user password
- *         salf:
- *           type: string
- *           description: Salf of the user hash
- *         verification:
- *           type: string
- *           description: Verification Code of the user hash
+ *           description: serial of the device
  *       example:
- *         id: d5fE_asz
- *         title: The New Turing Omnibus
- *         author: Alexander K. Dewdney
- *         finished: false
- *         createdAt: 2020-03-10T04:05:06.157Z
+ *         owner: AZE6ZAEAZ0EGZAEGZA0EAZG
+ *         name: Nasse personnel
+ *         serial: AZE9865
  * tags:
  *   name: User
  *   description: The books managing API
- * /login:
+ * /device:
  *   post:
- *     summary: User Connexion
- *     tags: [User]
+ *     summary: Device List
+ *     tags: [Device]
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
  *              example:
- *               email: daniel.albergucci@epitech.eu
- *               password: APzo
+ *               owner: speedgling
+ *               token: a9z6zbhbh67487jhvkjhv764khva9z6zbhbh67487jhvkjhv764khva9z6zbhbh67487jhvkjhv764khva9z6zbhbh67487jhvkjhv764khv
  *     responses:
  *       200:
- *         description: Login Successfull
+ *         description: Device List Successfull
  *         content:
  *           application/json:
  *             schema:
  *              example:
- *               User:
- *                  userId: 63dcd5cddc8d74a38b524cbc
- *                  email: nathanp83550@gmail.com
- *                  profilpicture": "undefined"
- *                  sexe: M
- *                  pseudo: poliskovia
- *               status: The New Turing Omnibus
- *               token: Alexander K. Dewdney
- *               message: false
+ *               status: OK
+ *               message: List of device
  *       400:
- *         description: Login Error
+ *         description: Device List Error
  *         content:
  *           application/json:
  *             schema:
@@ -76,30 +55,31 @@
  *               status: KO
  *               message: Error Message
  *
- * /register:
+ * /adddevice:
  *   post:
- *     summary: User Register
- *     tags: [User]
+ *     summary: Add Device
+ *     tags: [Device]
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
  *              example:
- *               email: daniel.albergucci@epitech.eu
- *               pseudo: Speedgling
- *               password: APzo
+ *               owner: speedgling
+ *               name: Nasse2000
+ *               serial: N2183609218369021836
+ *               token: a9z6zbhbh67487jhvkjhv764khva9z6zbhbh67487jhvkjhv764khva9z6zbhbh67487jhvkjhv764khva9z6zbhbh67487jhvkjhv764khv
  *     responses:
  *       200:
- *         description: register Successful
+ *         description: Add Device Successfull
  *         content:
  *           application/json:
  *             schema:
  *              example:
  *               status: OK
- *               message: Successful Message
+ *               message: List of device
  *       400:
- *         description: register Error
+ *         description: Add Device Error
  *         content:
  *           application/json:
  *             schema:
@@ -107,150 +87,29 @@
  *               status: KO
  *               message: Error Message
  *
- * /otp:
+ * /removedevice:
  *   post:
- *     summary: Otp Verification
- *     tags: [User]
+ *     summary: Remove Device
+ *     tags: [Device]
  *     requestBody:
  *       required: true
  *       content:
  *         application/json:
  *           schema:
  *              example:
- *               email: daniel.albergucci@epitech.eu
- *               code: 1234
+ *               id: 123aze123sqd21
+ *               token: a9z6zbhbh67487jhvkjhv764khva9z6zbhbh67487jhvkjhv764khva9z6zbhbh67487jhvkjhv764khva9z6zbhbh67487jhvkjhv764khv
  *     responses:
  *       200:
- *         description: TOP Successful
+ *         description: Remove Device Successfull
  *         content:
  *           application/json:
  *             schema:
  *              example:
  *               status: OK
- *               message: Successful Message
+ *               message: Device remove successfully
  *       400:
- *         description: OTP Error
- *         content:
- *           application/json:
- *             schema:
- *              example:
- *               status: KO
- *               message: Error Message
- *
- * /forgotpasswordemail:
- *   post:
- *     summary: Forgot Password Request
- *     tags: [User]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *              example:
- *               email: daniel.albergucci@epitech.eu
- *     responses:
- *       200:
- *         description: Forgot Password Request Successful
- *         content:
- *           application/json:
- *             schema:
- *              example:
- *               status: OK
- *               message: Successful Message
- *       400:
- *         description: Forgot Password Request Error
- *         content:
- *           application/json:
- *             schema:
- *              example:
- *               status: KO
- *               message: Error Message
- *
- * /forgotpasswordset:
- *   post:
- *     summary: Forgot Password Set
- *     tags: [User]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *              example:
- *               email: daniel.albergucci@epitech.eu
- *               password: ApZoEiru
- *     responses:
- *       200:
- *         description: Forgot Password Set Successful
- *         content:
- *           application/json:
- *             schema:
- *              example:
- *               status: OK
- *               message: Successful Message
- *       400:
- *         description: Forgot Password Set Error
- *         content:
- *           application/json:
- *             schema:
- *              example:
- *               status: KO
- *               message: Error Message
- *
- * /resetpassword:
- *   post:
- *     summary: Forgot Password Set
- *     tags: [User]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *              example:
- *               email: daniel.albergucci@epitech.eu
- *               password: ApZoEiru
- *               newpassword: QmSlDkFjGH
- *               token: akljebzaegzaeaziueaziaziuebaliudbibiufboèg87TG69VR983TV9878087R87
- *     responses:
- *       200:
- *         description: Forgot Password Set Successful
- *         content:
- *           application/json:
- *             schema:
- *              example:
- *               status: OK
- *               message: Successful Message
- *       400:
- *         description: Forgot Password Set Error
- *         content:
- *           application/json:
- *             schema:
- *              example:
- *               status: KO
- *               message: Error Message
- *
- * /userinfo:
- *   post:
- *     summary: User Info
- *     tags: [User]
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *              example:
- *               token: akljebzaegzaeaziueaziaziuebaliudbibiufboèg87TG69VR983TV9878087R87
- *     responses:
- *       200:
- *         description: User Info Successful
- *         content:
- *           application/json:
- *             schema:
- *              example:
- *               status: OK
- *               email: nathanp83550@gmail.com
- *               pseudo: poliskovia
- *       400:
- *         description: User Info Error
+ *         description: Remove Device Error
  *         content:
  *           application/json:
  *             schema:
@@ -310,7 +169,7 @@ module.exports = function (app) {
             res.status(400).json({ status: "KO", message: "Invalid Token" });
         else {
             Device.Devare_Device(req);
-            res.status(200).json({ status: "OK", message: "Device devare successfully" });
+            res.status(200).json({ status: "OK", message: "Device remove successfully" });
         }
     }))
 };
