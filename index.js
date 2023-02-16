@@ -36,7 +36,7 @@ const options = {
         },
         servers: [
             {
-                url: "http://localhost:2546",
+                url: "http://51.178.44.20:2546",
             },
         ],
     },
