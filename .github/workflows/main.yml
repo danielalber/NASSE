@@ -18,3 +18,4 @@ jobs:
       with:
         url: 'http://51.178.44.20:9000/hooks/deploy'
         method: 'GET'
+        customHeaders: '{"Content-Type": "application/json", "X-Hub-Signature": "KFYS$XT:o!a<vYq}5_#+*!jTH#=*q"}'
