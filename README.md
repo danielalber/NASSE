@@ -25,3 +25,11 @@ and run it.
 ## Docs
 You can find more details of our project on the readme website `https://nasse.readme.io/reference/authentification`
 You can find the swagger api doc from : `http://51.178.44.20:2436/api-docs/#/`
+
+## Deploy de API
+
+The API is hosted on a dedicated server and the deployment have been automatised. It work as follow :
+
+On the repository there is a prod branch that trigger a web hook using GitHub action when the branch receive a commit.
+
+The web hook then hit our dedicated server. As the API is using docker container the hook is configured to down the container then update the content and restart it.
