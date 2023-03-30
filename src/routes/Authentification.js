@@ -177,6 +177,7 @@
  *           schema:
  *              example:
  *               email: daniel.albergucci@epitech.eu
+ *               code: 123456
  *               password: ApZoEiru
  *     responses:
  *       200:
@@ -374,7 +375,7 @@ module.exports = function (app) {
         }
 
         var result = await Authentification.Authentification_ResetForgotPassword(req);
-        
+
         if (result == -1) {
             res.status(400).json({ status: "KO", message: "Invalid Mot de passe" });
         } else {
