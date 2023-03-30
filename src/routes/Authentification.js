@@ -367,12 +367,16 @@ module.exports = function (app) {
 
     // forgot passord set new password
     app.post('/forgotpasswordset', cors(), asyncMiddleware(async (req, res) => {
-        var result = await Authentification.Authentification_ResetForgotPassword(req);
+        var otpresult = await Authentification.Authentification_GetLoginVerificationCode(req);
 
+        if (otpresult == -1) {
+            res.status(400).json({ status: "KO", message: "Invalid OTP" });
+        }
+
+        var result = await Authentification.Authentification_ResetForgotPassword(req);
+        
         if (result == -1) {
             res.status(400).json({ status: "KO", message: "Invalid Mot de passe" });
-        } else if (result == -2) {
-            res.status(400).json({ status: "KO", message: "Invalid OTP" });
         } else {
             res.status(200).json({ status: "OK", message: "Mot de passe modifié" });
         }
