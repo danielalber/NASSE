@@ -370,7 +370,9 @@ module.exports = function (app) {
         var result = await Authentification.Authentification_ResetForgotPassword(req);
 
         if (result == -1) {
-            res.status(400).json({ status: "KO", message: "Error" });
+            res.status(400).json({ status: "KO", message: "Invalid Mot de passe" });
+        } else if (result == -2) {
+            res.status(400).json({ status: "KO", message: "Invalid OTP" });
         } else {
             res.status(200).json({ status: "OK", message: "Mot de passe modifié" });
         }

@@ -105,11 +105,14 @@ async function Authentification_ResetForgotPassword(req) {
         return -1;
     }
 
-    var salt = crypto.randomBytes(16).toString('hex');
-    var hash = crypto.pbkdf2Sync(req.body.password, salt, 1000, 64, `sha512`).toString(`hex`);
-    console.log(hash)
-    await requestdb.updateOne({ email: req.body.email }, { $set: { "hash": hash, "salt": salt } });
-    return 0;
+    if (Authentification_GetLoginVerificationCode(req) == 0) {
+        var salt = crypto.randomBytes(16).toString('hex');
+        var hash = crypto.pbkdf2Sync(req.body.password, salt, 1000, 64, `sha512`).toString(`hex`);
+        console.log(hash)
+        await requestdb.updateOne({ email: req.body.email }, { $set: { "hash": hash, "salt": salt } });
+        return 0;
+    }
+    return -2;
 }
 
 // get information about a user
