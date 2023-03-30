@@ -49,10 +49,10 @@ async function Authentification_Login(req) {
 async function Authentification_ResetPasswordEmail(req) {
     var requestdb = UserSchema.UserSchema;
 
-    if (req.body.email == null || req.body.password == null) {
+    if (req.body.email == null) {
         return -1;
     }
-    if (req.body.email == "" || req.body.password == "") {
+    if (req.body.email == "") {
         return -1;
     }
 
