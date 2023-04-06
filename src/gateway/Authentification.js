@@ -2,6 +2,7 @@ const crypto = require('crypto')
 const UserSchema = require('../schema/UserSchema');
 const { TokenGetInfo } = require('./TokenVerify');
 const MailerMiddleware = require('../../src/middleware/MailerMiddleware');
+const { v4: uuidv4 } = require('uuid');
 
 // Create a account to a user
 async function Authentification_Register(req) {
@@ -28,12 +29,12 @@ async function Authentification_Register(req) {
     }).then(function (data) {
         result = 0;
     }).catch(function (err) {
+        if (err.keyPattern.email === 1 && err.keyPattern.pseudo === 1)
+            result = -3;
         if (err.keyPattern.email === 1)
             result = -1;
         if (err.keyPattern.pseudo === 1)
             result = -2;
-        if (err.keyPattern.email === 1 && err.keyPattern.pseudo === 1)
-            result = -3;
     });
     return result;
 }
@@ -147,6 +148,7 @@ async function Authentification_GetLoginVerificationCode(req) {
     var res = await requestdb.findOne({ email: req.body.email });
 
     if (res.verification == req.body.code) {
+        await requestdb.updateOne({ email: req.body.email }, { $set: { "verification": uuidv4() } });
         return 0;
     }
     return -1;
