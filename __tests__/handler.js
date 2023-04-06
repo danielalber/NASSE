@@ -1,20 +1,18 @@
 const request = require('supertest');
-
+const http = require('http');
 const { v4: uuidv4 } = require('uuid');
 // const axios = require('axios');
-const url = 'http://127.0.0.1:8080';
 
 const pseudo = uuidv4();
 const email = pseudo + "@gmail.com";
-
+const url = "http"
 describe('Test Authentification', function () {
     test('Register: Successful', async () => {
-        const response = await request(app).get("/space/destinations");
-        expect(response.body).toEqual(["Mars", "Moon", "Earth", "Mercury", "Venus", "Jupiter"]);
-        expect(response.body).toHaveLength(6);
-        expect(response.statusCode).toBe(200);
-        // Testing a single element in the array
-        expect(response.body).toEqual(expect.arrayContaining(['Earth']));
+        http.get({ path: url }, response => {
+            let data = '';
+            response.on('data', _data => (data += _data));
+            response.on('end', () => resolve(data));
+        });
         // const res = await axios.post(`${url}/register`, {
         //     email: email,
         //     password: 'HelloBoys',

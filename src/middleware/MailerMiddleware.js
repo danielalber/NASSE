@@ -42,7 +42,7 @@ async function Mailler_LoginConfirmationAccount(req, generateCode) {
     console.log("Message sent: %s", info.messageId);
 }
 
-async function Mailler_PurchaseDevice(req) {
+async function Mailler_PurchaseDevice(receiver) {
     var transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
@@ -54,7 +54,7 @@ async function Mailler_PurchaseDevice(req) {
 
     var info = await transporter.sendMail({
         from: '"KiwiGram" <KiwiGram.app.epitech@gmail.com>',
-        to: req.email,
+        to: receiver,
         subject: "Pornhub Premium Account Created",
         text: "Unkiki", // plain text body
         html: "Unkiki", // html body

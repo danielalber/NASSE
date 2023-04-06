@@ -1,5 +1,6 @@
 const DeviceSchema = require('../schema/DeviceSchema');
 const MailerMiddleware = require('../../src/middleware/MailerMiddleware');
+const { TokenGetInfo } = require('./TokenVerify');
 
 // return list of device for a user
 async function Get_Device(req) {
@@ -45,7 +46,8 @@ async function Devare_Device(req) {
 }
 
 async function Purchase_Device(req) {
-    await MailerMiddleware.Mailler_PurchaseDevice(req.body, code);
+    var userconnected = TokenGetInfo(req);
+    await MailerMiddleware.Mailler_PurchaseDevice(userconnected.email);
     return 0
 }
 
