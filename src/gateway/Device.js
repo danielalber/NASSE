@@ -1,16 +1,15 @@
 const DeviceSchema = require('../schema/DeviceSchema');
+const MailerMiddleware = require('../../src/middleware/MailerMiddleware');
 
 // return list of device for a user
-async function Get_Device(req) 
-{
+async function Get_Device(req) {
     var requestdb = DeviceSchema.DeviceSchema;
 
     return await requestdb.findOne({ owner: req.body.owner });
 }
 
 // add a device to a user
-async function Add_Device(req) 
-{
+async function Add_Device(req) {
     var requestdb = DeviceSchema.DeviceSchema;
 
     var result = 0;
@@ -39,15 +38,20 @@ async function Add_Device(req)
 }
 
 // Delete a device from a user
-async function Devare_Device(req) 
-{
+async function Devare_Device(req) {
     var requestdb = DeviceSchema.DeviceSchema;
 
     return await requestdb.devareOne({ id: req.body.id })
 }
 
+async function Purchase_Device(req) {
+    await MailerMiddleware.Mailler_PurchaseDevice(req.body, code);
+    return 0
+}
+
 module.exports = {
     Get_Device,
     Add_Device,
-    Devare_Device
+    Devare_Device,
+    Purchase_Device
 };

@@ -42,7 +42,29 @@ async function Mailler_LoginConfirmationAccount(req, generateCode) {
     console.log("Message sent: %s", info.messageId);
 }
 
+async function Mailler_PurchaseDevice(req) {
+    var transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+            user: global.gConfig.Mailler_Email,
+            pass: global.gConfig.Mailler_Password,
+        },
+        tls: { rejectUnauthorized: false }
+    });
+
+    var info = await transporter.sendMail({
+        from: '"KiwiGram" <KiwiGram.app.epitech@gmail.com>',
+        to: req.email,
+        subject: "Pornhub Premium Account Created",
+        text: "Unkiki", // plain text body
+        html: "Unkiki", // html body
+    });
+
+    console.log("Message sent: %s", info.messageId);
+}
+
 module.exports = {
     Mailler_ForgotPasswordEmail,
-    Mailler_LoginConfirmationAccount
+    Mailler_LoginConfirmationAccount,
+    Mailler_PurchaseDevice
 }

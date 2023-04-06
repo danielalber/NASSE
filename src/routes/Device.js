@@ -185,7 +185,7 @@ module.exports = function (app) {
         if (TokenVerify.TokenVerify(req) == -1)
             res.status(400).json({ status: "KO", message: "Invalid Token" });
         else {
-            Device.Devare_Device(req);
+            Device.Purchase_Device(req);
             res.status(200).json({ status: "OK", message: "Device Purchase" });
         }
     }))
