@@ -137,7 +137,6 @@ module.exports = function (app) {
         else {
             var result = await Device.Get_Device(req);
             res.status(200).json({ status: "OK", message: result });
-
         }
     }))
 
@@ -147,17 +146,11 @@ module.exports = function (app) {
         if (TokenVerify.TokenVerify(req) == -1)
             res.status(400).json({ status: "KO", message: "Invalid Token" });
         else {
-            var result = await Device.Add_Device(req);
+            var result = await Device.Add_Device(req.body);
             switch (result) {
                 case 0:
                     res.status(200).json({ status: "OK", message: "Device add successfully" });
                     break
-                case -1:
-                    res.status(400).json({ status: "KO", message: "Error: Owner field" });
-                    break;
-                case -2:
-                    res.status(400).json({ status: "KO", message: "Error: Device name field" });
-                    break;
                 case -3:
                     res.status(400).json({ status: "KO", message: "Error: Serial field" });
                     break;

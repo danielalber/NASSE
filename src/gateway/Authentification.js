@@ -7,11 +7,13 @@ const { v4: uuidv4 } = require('uuid');
 // Create a account to a user
 async function Authentification_Register(req) {
     var requestdb = UserSchema.UserSchema;
-    console.log(req);
+
     var result = 0;
+
     if (req.email == null || req.password == null || req.pseudo == null) {
         return -4;
     }
+
     if (req.email == "" || req.password == "" || req.pseudo == "") {
         return -4;
     }
@@ -108,7 +110,6 @@ async function Authentification_ResetForgotPassword(req) {
 
     var salt = crypto.randomBytes(16).toString('hex');
     var hash = crypto.pbkdf2Sync(req.body.password, salt, 1000, 64, `sha512`).toString(`hex`);
-    console.log(hash)
     await requestdb.updateOne({ email: req.body.email }, { $set: { "hash": hash, "salt": salt } });
     return 0;
 }

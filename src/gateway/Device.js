@@ -23,16 +23,12 @@ async function Add_Device(req) {
 
     await requestdb.create({
         owner: req.email,
-        name: hash,
-        serial: salt,
+        name: req.name,
+        serial: req.serial,
     }).then(function (data) {
         result = 0;
     }).catch(function (err) {
-        if (err.keyPattern.owner === 1)
-            result = -1;
-        if (err.keyPattern.name === 1)
-            result = -2;
-        if (err.keyPattern.serial === 1 && err.keyPattern.serial === 1)
+        if (err.keyPattern.serial === 1)
             result = -3;
     });
     return result;

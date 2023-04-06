@@ -6,7 +6,10 @@ const { Schema } = mongoose;
 const DeviceSchema = new Schema({
     owner: String,
     name: String,
-    serial: String,
+    serial: {
+        type: String,
+        unique: true
+    },
 });
 
 const requestdb = mongoose.model('device', DeviceSchema);
