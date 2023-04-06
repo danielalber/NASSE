@@ -7,7 +7,7 @@ const pseudo = uuidv4();
 const email = pseudo + "@gmail.com";
 const url = "http://127.0.0.1:8080";
 
-describe('Authentification Registration', function () {
+describe('[Authentification Registration]', function () {
     test('Register: Successful', async () => {
         const res = await axios.post(`${url}/register`, {
             email: email,
@@ -89,12 +89,13 @@ describe('Authentification Registration', function () {
     // });
 })
 
-describe('Authentification Login', function () {
-    test('Login', async () => {
+describe('[Authentification Login]', function () {
+    test('Login: Successful', async () => {
         const res = await axios.post(`${url}/login`, {
             email: email,
             password: 'HelloBoys'
         })
+
         expect(res.status).toBe(200)
         expect(res.data.User.email).toEqual(email)
         expect(res.data.User.pseudo).toEqual(pseudo)
@@ -102,6 +103,39 @@ describe('Authentification Login', function () {
         expect(res.data.message).toEqual("Connexion réussie")
     });
 
+    test("Login: Account don't exist ", async () => {
+        const res = await axios.post(`${url}/login`, {
+            email: email + "junkEmail",
+            password: 'HelloBoysBen'
+        }).then(response => {
+            return response
+        }).catch(error => {
+            return error;
+        })
+
+        expect(res.response.status).toBe(400)
+        expect(res.response.data.status).toEqual("KO")
+        expect(res.response.data.message).toEqual("Ce compte n'éxiste pas")
+
+    });
+
+    test('Login : Wrong Login or password', async () => {
+        const res = await axios.post(`${url}/login`, {
+            email: email,
+            password: 'HelloBoysBen'
+        }).then(response => {
+            return response
+        }).catch(error => {
+            return error;
+        })
+
+        expect(res.response.status).toBe(400)
+        expect(res.response.data.status).toEqual("KO")
+        expect(res.response.data.message).toEqual("Identifiant ou mot de passe incorrect")
+
+    });
 })
 
-// "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2Mzc3OGE2N2IxZTc3YTBlYWMwNzRiOGUiLCJlbWFpbCI6ImRhbmllbC5hbGJlcmd1Y2NpQGVwaXRlY2guZXUiLCJwc2V1ZG8iOiJTcGVlZGdsaW5nIiwiaWF0IjoxNjgwNzcwMTM3LCJleHAiOjE2ODA4NTY1Mzd9.nbjU51kvKsBAOns0J68rfp1jWtkDLnbYY2AMczg-gG4",
+describe('[Authentification Forgot Password]', function () {
+
+})
