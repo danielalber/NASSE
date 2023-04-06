@@ -167,7 +167,7 @@ module.exports = function (app) {
             }
         }
     }))
-    
+
     // remove device
     app.post('/removedevice', cors(), asyncMiddleware(async (req, res) => {
         // Check token
