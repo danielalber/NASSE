@@ -365,6 +365,7 @@ module.exports = function (app) {
             res.status(200).json({ status: "OK", message: "Email de confirmation envoyé" });
         }
     }))
+    
 
     // forgot passord set new password
     app.post('/forgotpasswordset', cors(), asyncMiddleware(async (req, res) => {
