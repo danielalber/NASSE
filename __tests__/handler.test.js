@@ -1,6 +1,6 @@
+// const { describe, test, expect } = require('vitest')
 const { v4: uuidv4 } = require('uuid');
 const axios = require('axios');
-
 const pseudo = uuidv4();
 const serial = uuidv4();
 const email = pseudo + "@gmail.com";
