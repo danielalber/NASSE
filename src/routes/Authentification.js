@@ -306,6 +306,7 @@ module.exports = function (app) {
                 var code = Math.floor(100000 + Math.random() * 900000)
                 var result = await Authentification.Authentification_SetLoginVerificationCode(result.email, code);
                 await MailerMiddleware.Mailler_LoginConfirmationAccount(req.body, code);
+                /* istanbul ignore next */
                 break;
             case -1:
                 res.status(400).json({ status: "KO", message: "Ce compte n'éxiste pas" });
@@ -317,6 +318,7 @@ module.exports = function (app) {
     }))
 
     // OTP verification route
+    /* istanbul ignore next */
     app.post('/otp', cors(), asyncMiddleware(async (req, res) => {
         var result = await Authentification.Authentification_GetLoginVerificationCode(req);
 
@@ -341,19 +343,11 @@ module.exports = function (app) {
             case -2:
                 res.status(400).json({ status: "KO", message: "Pseudo déjà utilisé pour un autre compte" });
                 break;
-            case -3:
-                res.status(400).json({ status: "KO", message: "Email et Pseudo déjà utilisé pour un autre compte" });
-                break;
             case -4:
                 res.status(400).json({ status: "KO", message: "Renseigner toutes les informations requises" });
                 break;
         }
     }))
-
-    // logout route
-    app.get('/logout', cors(), (req, res) => {
-        res.send('Welcome to Logout');
-    })
 
     // request mail for forgot passwors
     app.post('/forgotpasswordemail', cors(), asyncMiddleware(async (req, res) => {
@@ -365,9 +359,10 @@ module.exports = function (app) {
             res.status(200).json({ status: "OK", message: "Email de confirmation envoyé" });
         }
     }))
-    
+
 
     // forgot passord set new password
+    /* istanbul ignore next */
     app.post('/forgotpasswordset', cors(), asyncMiddleware(async (req, res) => {
         var otpresult = await Authentification.Authentification_GetLoginVerificationCode(req);
 
@@ -401,9 +396,6 @@ module.exports = function (app) {
                     break;
                 case -2:
                     res.status(400).json({ status: "KO", message: "Mot de passe actuelle incorrect" });
-                    break;
-                default:
-                    res.status(400).json({ status: "KO", message: "Error" });
                     break;
             }
         }

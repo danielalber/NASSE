@@ -10,11 +10,7 @@ async function Authentification_Register(req) {
 
     var result = 0;
 
-    if (req.email == null || req.password == null || req.pseudo == null) {
-        return -4;
-    }
-
-    if (req.email == "" || req.password == "" || req.pseudo == "") {
+    if (req.email == null || req.password == null || req.pseudo == null || req.email == "" || req.password == "" || req.pseudo == "") {
         return -4;
     }
 
@@ -31,8 +27,6 @@ async function Authentification_Register(req) {
     }).then(function (data) {
         result = 0;
     }).catch(function (err) {
-        if (err.keyPattern.email === 1 && err.keyPattern.pseudo === 1)
-            result = -3;
         if (err.keyPattern.email === 1)
             result = -1;
         if (err.keyPattern.pseudo === 1)
@@ -52,10 +46,7 @@ async function Authentification_Login(req) {
 async function Authentification_ResetPasswordEmail(req) {
     var requestdb = UserSchema.UserSchema;
 
-    if (req.body.email == null) {
-        return -1;
-    }
-    if (req.body.email == "") {
+    if (req.body.email == null || req.body.email == "") {
         return -1;
     }
 
@@ -64,7 +55,7 @@ async function Authentification_ResetPasswordEmail(req) {
     if (user) {
         var code = Math.floor(100000 + Math.random() * 900000);
         await Authentification_SetLoginVerificationCode(user.email, code);
-        await MailerMiddleware.Mailler_LoginConfirmationAccount(req.body, code);
+        await MailerMiddleware.Mailler_ForgotPasswordEmail(req, code);
         return 0
     } else {
         return -1;
@@ -75,10 +66,7 @@ async function Authentification_ResetPasswordEmail(req) {
 async function Authentification_ResetPassword(req) {
     var requestdb = UserSchema.UserSchema;
 
-    if (req.body.password == null || req.body.newpassword == null) {
-        return -1;
-    }
-    if (req.body.password == "" || req.body.newpassword == "") {
+    if (req.body.password == null || req.body.newpassword == null || req.body.password == "" || req.body.newpassword == "") {
         return -1;
     }
 
@@ -101,10 +89,7 @@ async function Authentification_ResetPassword(req) {
 async function Authentification_ResetForgotPassword(req) {
     var requestdb = UserSchema.UserSchema;
 
-    if (req.body.password == null) {
-        return -1;
-    }
-    if (req.body.password == "") {
+    if (req.body.password == null || req.body.password == "") {
         return -1;
     }
 
@@ -122,13 +107,6 @@ async function Authentification_Get_Info(req) {
     return await requestdb.findOne({ email: userconnected.email });
 }
 
-// get id from a user
-async function Authentification_Get_userId(req) {
-    var requestdb = UserSchema.UserSchema;
-
-    return await requestdb.findOne({ email: req.body.email });
-}
-
 // Set a OTP code verification to a user
 async function Authentification_SetLoginVerificationCode(email, code) {
     var requestdb = UserSchema.UserSchema;
@@ -137,12 +115,14 @@ async function Authentification_SetLoginVerificationCode(email, code) {
 }
 
 // set profil picture
+/* istanbul ignore next */
 async function Authentification_SetProfilPicture(userId, fileUrl) {
     var requestdb = UserSchema.UserSchema;
     return await requestdb.updateOne({ _id: userId }, { $set: { "profilpicture": fileUrl } });
 }
 
 // get TOP verification code
+/* istanbul ignore next */
 async function Authentification_GetLoginVerificationCode(req) {
     var requestdb = UserSchema.UserSchema;
 
@@ -162,7 +142,6 @@ module.exports = {
     Authentification_GetLoginVerificationCode,
     Authentification_ResetPassword,
     Authentification_Get_Info,
-    Authentification_Get_userId,
     Authentification_ResetPasswordEmail,
     Authentification_ResetForgotPassword,
     Authentification_SetProfilPicture

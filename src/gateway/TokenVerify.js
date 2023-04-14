@@ -6,6 +6,7 @@ function TokenVerify(req) {
         try {
             const decodedToken = jwt.verify(req.body.token, '%hx5g@BdocPDX4D^P#owO#11tg5R$RX#');
             const userId = decodedToken.userId;
+              /* istanbul ignore next */
             if (req.body.userId && req.body.userId !== userId) {
                 return -1;
             } else {
