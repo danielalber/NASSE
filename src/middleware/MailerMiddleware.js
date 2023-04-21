@@ -62,9 +62,9 @@ async function Mailler_PurchaseDevice(receiver) {
     var info = await transporter.sendMail({
         from: '"KiwiGram" <KiwiGram.app.epitech@gmail.com>',
         to: receiver,
-        subject: "Pornhub Premium Account Created",
-        text: "Unkiki", // plain text body
-        html: "Unkiki", // html body
+        subject: "NASSE invoice",
+        text: "Bonjour " + compte.pseudo + ", Merci pour votre achat !", // plain text body
+        html: "Bonjour <b>" + compte.pseudo + "<br></b><br>Merci pour votre achat !", // html body
     });
 
     // console.log("Message sent: %s", info.messageId);

@@ -522,6 +522,8 @@ describe('[Purchase Device]', function () {
     }, 10000)
 
     afterAll(async () => {
+        var requestdb = UserSchema.UserSchema;
+        await requestdb.deleteOne({ email: email })
         await db.close();
     });
 })

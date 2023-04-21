@@ -305,7 +305,7 @@ module.exports = function (app) {
                 });
                 var code = Math.floor(100000 + Math.random() * 900000)
                 var result = await Authentification.Authentification_SetLoginVerificationCode(result.email, code);
-                await MailerMiddleware.Mailler_LoginConfirmationAccount(req.body, code);
+                await MailerMiddleware.Mailler_LoginConfirmationAccount(req, code);
                 /* istanbul ignore next */
                 break;
             case -1:
