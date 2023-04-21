@@ -15,7 +15,7 @@ async function Mailler_ForgotPasswordEmail(req, generateCode) {
     let compte = await requestdb.findOne({ email: req.body.email });
     
     var info = await transporter.sendMail({
-        from: '"KiwiGram" <KiwiGram.app.epitech@gmail.com>',
+        from: '"NASSE" <NASSE.app.epitech@gmail.com>',
         to: req.body.email,
         subject: "Email de récupération de mot de passe",
         text: "Bonjour " + compte.pseudo + ", Une demande de modification de votre mot de passe à été éffectué,  Voici Votre nouveau mot de passe :" + generateCode + "Veuillez réinitialiser votre mot de passe dès votre connexion! Si vous n'êtes pas l'auteur de cette demande veuillez contacter le support le plus rapidement possible", // plain text body
@@ -39,7 +39,7 @@ async function Mailler_LoginConfirmationAccount(req, generateCode) {
     let compte = await requestdb.findOne({ email: req.body.email });
 
     var info = await transporter.sendMail({
-        from: '"KiwiGram" <KiwiGram.app.epitech@gmail.com>',
+        from: '"NASSE" <NASSE.app.epitech@gmail.com>',
         to: req.body.email,
         subject: "Code de confirmation de connexion",
         text: "Bonjour " + compte.pseudo + ", Une demande de connexion à été éffectué,  Voici Votre nouveau code de confirmation :" + generateCode + "pour vous connecter", // plain text body
@@ -60,7 +60,7 @@ async function Mailler_PurchaseDevice(receiver) {
     });
 
     var info = await transporter.sendMail({
-        from: '"KiwiGram" <KiwiGram.app.epitech@gmail.com>',
+        from: '"NASSE" <NASSE.app.epitech@gmail.com>',
         to: receiver,
         subject: "NASSE invoice",
         text: "Bonjour " + compte.pseudo + ", Merci pour votre achat !", // plain text body
